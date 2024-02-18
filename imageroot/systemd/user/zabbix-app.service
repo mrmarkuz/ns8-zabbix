@@ -1,0 +1,37 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  zabbix-app.service
+BindsTo=zabbix.service
+After=zabbix.service postgresql-app.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/mkdir -p config
+ExecStartPre=/bin/rm -f %t/zabbix-app.pid %t/zabbix-app.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-app.pid \
+    --cidfile %t/zabbix-app.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/zabbix.pod-id --replace -d --name  zabbix-app \
+    --volume zabbix-app:/var/www/html/:Z \
+    --volume ./config:/tmp:Z \
+    --env=NGINX_* \
+    --env 'CONFIG_DATABASE_URI="postgresql://postgres:Nethesis,1234@127.0.0.1:5432/zabbix"' \
+    ${NGINX_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-app.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP zabbix-app
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/zabbix-app.ctr-id
+PIDFile=%t/zabbix-app.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
