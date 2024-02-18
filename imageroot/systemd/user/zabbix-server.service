@@ -4,9 +4,9 @@
 #
 
 [Unit]
-Description=Podman  zabbix-app.service
+Description=Podman  zabbix-server.service
 BindsTo=zabbix.service
-After=zabbix.service postgresql-app.service zabbix-server.service
+After=zabbix.service postgresql-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
@@ -21,11 +21,12 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-app.pid \
     --cidfile %t/zabbix-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/zabbix.pod-id --replace -d --name  zabbix-app \
+    --volume zabbix-app:/var/lib/zabbix/:Z \
+    --volume ./config:/tmp:Z \
     --env 'DB_SERVER_HOST="127.0.0.1"' \
     --env 'POSTGRES_USER="postgres"' \
     --env 'POSTGRES_PASSWORD="Nethesis,1234"' \
-    --env 'ZBX_SERVER_HOST="127.0.0.1"' \
-    ${ZABBIX_WEB_NGINX_PGSQL_IMAGE}
+    ${ZABBIX_SERVER_PGSQL_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP zabbix-app
 SyslogIdentifier=%u
