@@ -16,22 +16,22 @@ WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p config
-ExecStartPre=/bin/rm -f %t/zabbix-app.pid %t/zabbix-app.ctr-id
+ExecStartPre=/bin/rm -f %t/zabbix-server.pid %t/zabbix-server.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-app.pid \
-    --cidfile %t/zabbix-app.ctr-id --cgroups=no-conmon \
-    --pod-id-file %t/zabbix.pod-id --replace -d --name  zabbix-app \
-    --volume zabbix-app:/var/lib/zabbix/:Z \
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-server.pid \
+    --cidfile %t/zabbix-server.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/zabbix.pod-id --replace -d --name  zabbix-server \
+    --volume zabbix-server:/var/lib/zabbix/:Z \
     --volume ./config:/tmp:Z \
     --env 'DB_SERVER_HOST="127.0.0.1"' \
     --env 'POSTGRES_USER="postgres"' \
     --env 'POSTGRES_PASSWORD="Nethesis,1234"' \
     ${ZABBIX_SERVER_PGSQL_IMAGE}
-ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-app.ctr-id -t 10
-ExecReload=/usr/bin/podman kill -s HUP zabbix-app
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-server.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP zabbix-server
 SyslogIdentifier=%u
-ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/zabbix-app.ctr-id
-PIDFile=%t/zabbix-app.pid
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/zabbix-server.ctr-id
+PIDFile=%t/zabbix-server.pid
 Type=forking
 
 [Install]
