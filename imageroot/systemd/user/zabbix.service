@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman zabbix.service
-Requires=postgresql-app.service zabbix-server.service zabbix-app.service 
-Before=postgresql-app.service zabbix-server.service zabbix-app.service 
+Requires=postgresql-app.service zabbix-server.service zabbix-agent.service zabbix-app.service 
+Before=postgresql-app.service zabbix-server.service zabbix-agent.service zabbix-app.service 
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
