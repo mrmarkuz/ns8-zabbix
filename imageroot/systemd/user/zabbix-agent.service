@@ -6,7 +6,7 @@
 [Unit]
 Description=Podman  zabbix-agent.service
 BindsTo=zabbix.service
-After=zabbix.service postgresql-app.service zabbix-server.service
+After=zabbix-server.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
