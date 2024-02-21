@@ -23,7 +23,6 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/zabbix.pid \
     --pod-id-file %t/zabbix.pod-id \
     --name zabbix \
     --publish 127.0.0.1:${TCP_PORT}:8080 \
-    --publish 10051:10051 \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/zabbix.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/zabbix.pod-id -t 10
