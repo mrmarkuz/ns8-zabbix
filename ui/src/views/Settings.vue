@@ -61,6 +61,28 @@
                 $t("settings.enabled")
               }}</template>
             </cv-toggle>
+
+            <cv-text-input
+              :label="$t('settings.zabbix_servername')"
+              placeholder="NethServer Zabbix"
+              v-model.trim="servername"
+              class="mg-bottom"
+              :invalid-message="$t(error.servername)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="servername"
+            >
+            </cv-text-input>
+
+            <cv-text-input
+              :label="$t('settings.zabbix_timezone')"
+              placeholder="Europe/Riga"
+              v-model.trim="timezone"
+              class="mg-bottom"
+              :invalid-message="$t(error.timezone)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="timezone"
+            >
+            </cv-text-input>
               <!-- advanced options -->
             <cv-accordion ref="accordion" class="maxwidth mg-bottom">
               <cv-accordion-item :open="toggleAccordion[0]">
@@ -125,6 +147,8 @@ export default {
       host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: true,
+      servername: "",
+      timezone: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -135,6 +159,8 @@ export default {
         host: "",
         lets_encrypt: "",
         http2https: "",
+        servername: "",
+        timezone: "",
       },
     };
   },
@@ -202,6 +228,8 @@ export default {
       this.host = config.host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
+      this.servername = config.servername;
+      this.timezone = config.servername;
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
@@ -271,6 +299,8 @@ export default {
             host: this.host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            servername: this.servername,
+            timezone: this.timezone,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
