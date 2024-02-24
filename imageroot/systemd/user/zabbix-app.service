@@ -25,7 +25,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-app.pid \
     --env POSTGRES_USER=postgres \
     --env POSTGRES_PASSWORD=Nethesis,1234 \
     --env ZBX_SERVER_HOST=zabbix-server \
-    --env PHP_TZ=Europe/Vienna \
+    --env EXPOSE_WEB_SERVER_INFO=off \
     ${ZABBIX_WEB_NGINX_PGSQL_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP zabbix-app
