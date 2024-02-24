@@ -21,8 +21,8 @@ config = {}
 config["host"] = os.getenv("TRAEFIK_HOST","")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
-config["servername"] = os.getenv("ZBX_SERVER_NAME","NethServer Zabbix")
-config["timezone"] = os.getenv("PHP_TZ","Europe/Riga")
+config["servername"] = os.getenv("ZBX_SERVER_NAME")
+config["timezone"] = os.getenv("PHP_TZ")
 
 # Dump the configuration to stdout
 json.dump(config, fp=sys.stdout)
