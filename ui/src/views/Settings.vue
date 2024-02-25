@@ -229,7 +229,7 @@ export default {
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.servername = config.servername;
-      this.timezone = config.servername;
+      this.timezone = config.timezone;
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
