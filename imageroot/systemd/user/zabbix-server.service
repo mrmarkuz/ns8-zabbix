@@ -21,6 +21,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-server.pid \
     --cidfile %t/zabbix-server.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/zabbix.pod-id --replace -d --name zabbix-server \
+    --cap-add=net_raw \
     --env DB_SERVER_HOST=postgresql-app \
     --env POSTGRES_USER=postgres \
     --env POSTGRES_PASSWORD=Nethesis,1234 \
