@@ -1,19 +1,19 @@
 {
-  "name": "zabbix",
+  "name": "Zabbix",
   "description": {
-    "en": "My zabbix module"
+    "en": "Open source monitoring suite"    
   },
-  "categories": [],
+  "categories": ["monitoring"],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Markus Neuberger",
+      "email": "dev@markusneuberger.at"
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.zabbix.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-zabbix"
+    "documentation_url": "https://www.zabbix.com/manuals",
+    "bug_url": "https://community.nethserver.org",
+    "code_url": "https://github.com/mrmarkuz/ns8-zabbix"
   },
-  "source": "ghcr.io/nethserver/zabbix"
+  "source": "ghcr.io/mrmarkuz/zabbix"
 }
