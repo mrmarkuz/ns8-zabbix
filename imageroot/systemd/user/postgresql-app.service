@@ -16,6 +16,7 @@ Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/postgresql-app.pid %t/postgresql-app.ctr-id
 ExecStartPre=/bin/mkdir -p %S/state/restore/
+ExecStartPre=/usr/bin/cp %S/images/images.sql %S/state/restore/
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/postgresql-app.pid \
     --cidfile %t/postgresql-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/zabbix.pod-id --replace -d --name postgresql-app \
