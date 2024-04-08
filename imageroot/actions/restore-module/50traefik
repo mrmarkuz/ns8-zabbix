@@ -10,14 +10,20 @@ import json
 import agent
 import os
 
-request = json.load(sys.stdin)
-renv = request['environment']
+# Find default traefik instance for current node
+default_traefik_id = agent.resolve_agent_id('traefik@node')
+if default_traefik_id is None:
+    sys.exit(2)
 
-configure_retval = agent.tasks.run(agent_id=os.environ['AGENT_ID'], action='configure-module', data={
-    "lets_encrypt": renv["TRAEFIK_LETS_ENCRYPT"] == "True",
-    "host": renv["TRAEFIK_HOST"],
-    "http2https": renv["TRAEFIK_HTTP2HTTPS"] == "True",
-    "servername": renv["ZBX_SERVER_NAME"],
-    "timezone": renv["PHP_TZ"],
-})
-agent.assert_exp(configure_retval['exit_code'] == 0, "The configure-module subtask failed!")
+# Configure traefik virtual host
+response = agent.tasks.run(
+    agent_id=default_traefik_id,
+    action='set-route',
+    data={        
+        'instance': os.environ['MODULE_ID'],
+        'url': 'http://127.0.0.1:' + os.environ["TCP_PORT"],
+        'lets_encrypt': os.environ["TRAEFIK_LETS_ENCRYPT"] == True,
+        'host': os.environ["TRAEFIK_HOST"],
+        'http2https': os.environ["TRAEFIK_HTTP2HTTPS"] == True
+    },
+)
