@@ -18,7 +18,11 @@
     "mount": "Mount",
     "no_services": "No services",
     "no_images": "No images",
-    "no_volumes": "No volumes"
+    "no_volumes": "No volumes",
+    "guacamole_webapp":"Zabbix",
+    "not_configured":"Zabbix is not configured",
+    "configure":"Configure Zabbix",
+    "open_webapp":"Open Zabbix"
   },
   "settings": {
     "title": "Settings",
@@ -27,12 +31,15 @@
     "zabbix_fqdn": "zabbix hostname (FQDN)",
     "lets_encrypt": "Request LE Certificate",
     "http_to_https": "Force HTTPS",
+    "ldap_domain": "LDAP/AD Domain",
     "enabled": "Enabled",
     "disabled": "Disabled",
     "advanced": "Advanced",
     "configuring": "Configuring",
-    "instance_configuration": "Configure zabbix",
-    "domain_already_used_in_traefik": "Domain already used in traefik"
+    "instance_configuration": "Configure Zabbix",
+    "domain_already_used_in_traefik": "Domain already used in traefik",
+    "choose_the_ldap_domain_to_use": "Choose the optional LDAP domain to use for Zabbix",
+    "choose_ldap_domain": "Choose LDAP/AD Domain or leave empty"
   },
   "about": {
     "title": "About"

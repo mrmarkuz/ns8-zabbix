@@ -15,7 +15,19 @@
         "test_field": "Testfeld",
         "configure_instance": "{instance} konfigurieren",
         "save": "Speichern",
-        "title": "Einstellungen"
+        "title": "Einstellungen",
+        "ldap_domain": "LDAP/AD Domäne",
+        "guacamole_fqdn": "Guacamole Hostname (FQDN)",
+        "lets_encrypt": "LE Zertifikat anfordern",
+        "http_to_https": "HTTPS erzwingen",
+        "enabled": "Aktiv",
+        "disabled": "Inaktiv",
+        "advanced": "Erweitert",
+        "configuring": "Konfiguriere",
+        "instance_configuration": "Konfiguriere Zabbix",
+        "domain_already_used_in_traefik": "Domäne wird bereits in Traefik verwendet",
+        "choose_the_ldap_domain_to_use": "Optionale LDAP/AD Domäne für Zabbix auswählen",
+        "choose_ldap_domain": "LDAP/AD Domäne wählen oder leer lassen"
     },
     "common": {
         "required": "erforderlich",
@@ -36,7 +48,11 @@
         "title": "Status",
         "installation_node": "Knoten der Installation",
         "node": "Knoten",
-        "no_volumes": "keine Volumen"
+        "no_volumes": "keine Volumen",
+        "zabbix_webapp":"Zabbix",
+        "not_configured":"Zabbix ist nicht konfiguriert",
+        "configure":"Zabbix konfigurieren",
+        "open_webapp":"Zabbix öffnen"
     },
     "about": {
         "title": "Über"
