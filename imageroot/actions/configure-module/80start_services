@@ -13,4 +13,5 @@ exec 1>&2
 
 touch smarthost.env
 
-systemctl --user enable --now zabbix.service
+systemctl --user enable zabbix.service
+systemctl --user restart zabbix.service
