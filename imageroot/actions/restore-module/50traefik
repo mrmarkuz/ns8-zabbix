@@ -22,8 +22,8 @@ response = agent.tasks.run(
     data={        
         'instance': os.environ['MODULE_ID'],
         'url': 'http://127.0.0.1:' + os.environ["TCP_PORT"],
-        'lets_encrypt': os.environ.get["TRAEFIK_LETS_ENCRYPT",False],
-        'host': os.environ.get["TRAEFIK_HOST","zabbix.domain.tld"],
-        'http2https': os.environ.get["TRAEFIK_HTTP2HTTPS",False]
+        'lets_encrypt': os.environ.get("TRAEFIK_LETS_ENCRYPT",False),
+        'host': os.environ.get("TRAEFIK_HOST","zabbix.domain.tld"),
+        'http2https': os.environ.get("TRAEFIK_HTTP2HTTPS",False)
     },
 )
