@@ -255,7 +255,7 @@ export default {
         isValidationOk = false;
       }
       if (!this.timezone) {
-        this.error.servername = "common.required";
+        this.error.timezone = "common.required";
 
         if (isValidationOk) {
           this.focusElement("timezone");
