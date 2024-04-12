@@ -6,8 +6,6 @@ This is the Zabbix monitoring system for [NethServer 8](https://github.com/NethS
 
 Install via Software Center by adding my [repository](https://repo.mrmarkuz.com)
 
-The default username is Admin and the password is zabbix.
-
 Install via CLI:
 
     add-module ghcr.io/nethserver/zabbix:latest 
@@ -69,6 +67,10 @@ The FQDN, the servername and the time zone needs to be configured.
 The servername is shown under the Zabbix logo and in the page title (shown in browser tab).
 
 The time zone is the PHP timezone format like "Europe/Vienna".
+
+## Login
+
+The default username is Admin and the password is zabbix. Please change the password as soon as possible.
 
 ## Uninstall
 
