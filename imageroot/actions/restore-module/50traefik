@@ -15,4 +15,4 @@ configure_retval = agent.tasks.run(agent_id=os.environ['AGENT_ID'], action='conf
     "servername": os.environ.get("ZBX_SERVER_NAME",""),
     "timezone": os.environ.get("PHP_TZ","Europe/Vienna")
 })
-agent.assert_exp(configure_retval['exit_code'] == 0, "The configure-module subtask failed!")
+agent.assert_exp(configure_retval['exit_code'] == 0, "The configure-module subtask failed! You can run just one instance on a node.")
