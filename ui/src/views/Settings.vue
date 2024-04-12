@@ -246,6 +246,22 @@ export default {
         }
         isValidationOk = false;
       }
+      if (!this.servername) {
+        this.error.servername = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("servername");
+        }
+        isValidationOk = false;
+      }
+      if (!this.timezone) {
+        this.error.servername = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("timezone");
+        }
+        isValidationOk = false;
+      }
       return isValidationOk;
     },
     configureModuleValidationFailed(validationErrors) {
