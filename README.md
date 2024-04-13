@@ -22,7 +22,7 @@ This is only possible before the web UI configuration of Zabbix.
 Force a backup on NS7 by running `/etc/e-smith/events/actions/nethserver-zabbix-backup`
 Copy `/var/lib/nethserver/zabbix/backup/zabbix.sql` from NS7 to the `/root` on NS8
 
-Login to NS8 as root and run following commands. Define you zabbix instance in the first command, in this example it's zabbix1.
+Login to NS8 as root and run following commands. Define your zabbix instance in the first command, in this example it's zabbix1.
 
 ```
 export instance=zabbix1 # Define the Zabbix instance name you want to import
