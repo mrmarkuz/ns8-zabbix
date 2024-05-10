@@ -4,7 +4,7 @@ This is the Zabbix monitoring system for [NethServer 8](https://github.com/NethS
 
 ## Install
 
-Install via Software Center by adding my [repository](https://repo.mrmarkuz.com)
+Install via Software Center by adding my repo as explained [here](https://repo.mrmarkuz.com)
 
 Install via CLI:
 
