@@ -76,21 +76,25 @@ Put the images to /home/zabbix1/.config/state/images, you need to create the dir
 
 Enter the zabbix environment, in this example instance name zabbix1 is used.
 
-`runagent -m zabbix1`
+    runagent -m zabbix1
 
 Copy the images to the container:
 
-`podman cp images postgresql-app:/var/lib/postgresql/data/`
+    podman cp images postgresql-app:/var/lib/postgresql/data/
 
 Import the images:
 
-`podman exec -w /var/lib/postgresql/data -i postgresql-app bash -c "for d in images/*.png; do psql -U postgres -d zabbix -c \"insert into images (imageid,imagetype,name,image) values ((select max(imageid) +1 from images),1,'\$d',pg_read_binary_file('\$d'));\"; done"`
+    podman exec -w /var/lib/postgresql/data -i postgresql-app bash -c "for d in images/*.png; do psql -U postgres -d zabbix -c \"insert into images (imageid,imagetype,name,image) values ((select max(imageid) +1 from images),1,'\$d',pg_read_binary_file('\$d'));\"; done"
 
 The result are a lot of INSERT lines.
 
+Remove the images from the container as they are already imported:
+
+    podman exec -ti postgresql-app rm -rf /var/lib/postgresql/data/images
+
 Exit the environment:
 
-`exit`
+    exit
 
 The images should be available in the web UI now.
 
