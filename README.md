@@ -68,6 +68,32 @@ The servername is shown under the Zabbix logo and in the page title (shown in br
 
 The time zone is the PHP timezone format like "Europe/Vienna".
 
+## Add images to Zabbix
+
+The images should be in png format. If an image already exists it won't be added.
+
+Put the images to /home/zabbix1/.config/state/images, you need to create the directory images.
+
+Enter the zabbix environment, in this example instance name zabbix1 is used.
+
+`runagent -m zabbix1`
+
+Copy the images to the container:
+
+`podman cp images postgresql-app:/var/lib/postgresql/data/`
+
+Import the images:
+
+`podman exec -w /var/lib/postgresql/data -i postgresql-app bash -c "for d in images/*.png; do psql -U postgres -d zabbix -c \"insert into images (imageid,imagetype,name,image) values ((select max(imageid) +1 from images),1,'\$d',pg_read_binary_file('\$d'));\"; done"`
+
+The result are a lot of INSERT lines.
+
+Exit the environment:
+
+`exit`
+
+The images should be available in the web UI now.
+
 ## Login
 
 The default username is Admin and the password is zabbix. Please change the password as soon as possible.
