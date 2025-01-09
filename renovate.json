@@ -14,7 +14,7 @@
         "build-images.sh"
       ],
       "matchStrings": [
-        "docker\\.io/zabbix/zabbix-server-pgsql:7.0.(?<currentValue>[-0-9\\.a-z]+)"
+        "docker\\.io/zabbix/zabbix-server-pgsql:(?<currentValue>[-0-9\\.a-z]+)"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "zabbix/zabbix-server-pgsql"
