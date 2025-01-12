@@ -18,6 +18,65 @@
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "zabbix/zabbix-server-pgsql"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "build-images.sh"
+      ],
+      "matchStrings": [
+        "docker\\.io/zabbix/zabbix-agent2:(?<currentValue>[-0-9\\.a-z]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "zabbix/zabbix-agent2"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "build-images.sh"
+      ],
+      "matchStrings": [
+        "docker\\.io/zabbix/zabbix-web-nginx-pgsql:(?<currentValue>[-0-9\\.a-z]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "zabbix/zabbix-web-nginx-pgsql"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "build-images.sh"
+      ],
+      "matchStrings": [
+        "docker\\.io/postgres:(?<currentValue>[-0-9\\.a-z]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "postgres"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "zabbix-server-pgsql"
+      ],
+      "allowedVersions": "<= 7.0"
+    },
+    {
+      "matchPackageNames": [
+        "zabbix-agent2"
+      ],
+      "allowedVersions": "<= 7.0"
+    },
+    {
+      "matchPackageNames": [
+        "zabbix-web-nginx-pgsql"
+      ],
+      "allowedVersions": "<= 7.0"
+    },
+    {
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "allowedVersions": "<= 15.9"
     }
   ]
 }
