@@ -36,6 +36,12 @@
         "postgres"
       ],
       "allowedVersions": "< 16"
+    },
+    {
+      "matchPackageNames": [
+        "/^zabbix/"
+      ],
+      "allowedVersions": "< 7.1.0"
     }
   ]
 }
