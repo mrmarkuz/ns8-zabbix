@@ -58,19 +58,19 @@
       "matchPackageNames": [
         "zabbix/zabbix-server-pgsql"
       ],
-      "allowedVersions": "< 7.2"
+      "allowedVersions": "<= 7.1"
     },
     {
       "matchPackageNames": [
         "zabbix/zabbix-agent2"
       ],
-      "allowedVersions": "< 7.2"
+      "allowedVersions": "<= 7.1"
     },
     {
       "matchPackageNames": [
         "zabbix/zabbix-web-nginx-pgsql"
       ],
-      "allowedVersions": "< 7.2"
+      "allowedVersions": "<= 7.1"
     },
     {
       "matchPackageNames": [
