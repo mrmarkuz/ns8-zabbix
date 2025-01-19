@@ -17,17 +17,6 @@
         "\\bdocker\\.io/(?<depName>[^:]+):(?<currentValue>[-0-9\\.a-z]+)"
       ],
       "datasourceTemplate": "docker"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "build-images.sh"
-      ],
-      "matchStrings": [
-        "docker\\.io/postgres:(?<currentValue>[-0-9\\.a-z]+)"
-      ],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "postgres"
     }
   ],
   "packageRules": [
@@ -39,7 +28,7 @@
     },
     {
       "matchPackageNames": [
-        "/^zabbix/"
+        "zabbix"
       ],
       "allowedVersions": "< 7.1.0"
     }
