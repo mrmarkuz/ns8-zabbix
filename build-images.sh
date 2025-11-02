@@ -41,11 +41,11 @@ buildah add "${container}" ui/dist /ui
 # rootfull=0 === rootless container
 # tcp-ports-demand=1 number of tcp Port to reserve , 1 is the minimum, can be udp or tcp
 buildah config --entrypoint=/ \
+    --label="org.nethserver.max-per-node=1" \
+	--label="org.nethserver.min-core=3.12.4-0" \
     --label="org.nethserver.authorizations=node:fwadm traefik@any:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-	--label="org.nethserver.max-per-node=1" \
-	--label="org.nethserver.min-core=3.12.4-0" \
     --label="org.nethserver.images=docker.io/postgres:15.14-alpine docker.io/zabbix/zabbix-server-pgsql:7.0.20-alpine docker.io/zabbix/zabbix-agent2:7.0.20-alpine docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.20-alpine" \
     "${container}"
 # Commit the image
