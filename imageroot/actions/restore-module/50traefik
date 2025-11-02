@@ -8,11 +8,13 @@
 import agent
 import os
 
+request = json.load(sys.stdin)
+renv = request['environment']
+
 configure_retval = agent.tasks.run(agent_id=os.environ['AGENT_ID'], action='configure-module', data={
-    "lets_encrypt": os.environ.get("TRAEFIK_LETS_ENCRYPT",False) == "True",
-    "host": os.environ.get("TRAEFIK_HOST","zabbix.test.com"),
-    "http2https": os.environ.get("TRAEFIK_HTTP2HTTPS",False) == "True",
-    "servername": os.environ.get("ZBX_SERVER_NAME",""),
-    "timezone": os.environ.get("PHP_TZ","Europe/Riga")
+    "host": renv["TRAEFIK_HOST"],
+    "http2https": renv["TRAEFIK_HTTP2HTTPS"] == "True",
+    "servername": renv["ZBX_SERVER_NAME"],
+    "timezone": renv["PHP_TZ"]
 })
 agent.assert_exp(configure_retval['exit_code'] == 0, "The configure-module subtask failed! You can run just one instance on a node.")
