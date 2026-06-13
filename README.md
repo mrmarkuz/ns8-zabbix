@@ -112,6 +112,8 @@ Create/edit custom conf file, in this example `override.conf`:
 podman unshare nano $(podman volume inspect zabbix-agent-config --format={{.Mountpoint}})/override.conf
 ```
 
+Zabbix needs to be restarted to apply the customizations.
+
 ## Add images to Zabbix
 
 The images should be in png format. If an image already exists it won't be added.
