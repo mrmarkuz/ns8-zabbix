@@ -68,6 +68,50 @@ The servername is shown under the Zabbix logo and in the page title (shown in br
 
 The time zone is the PHP timezone format like "Europe/Vienna".
 
+## Login
+
+The default username is Admin and the password is zabbix. Please change the password as soon as possible.
+
+## Customization
+
+### Zabbix server
+
+The Zabbix server can be customized by adding environment variables to `zabbix-server.env`.
+
+```
+runagent -m zabbix1 nano zabbix-server.env
+```
+
+### Zabbix web
+
+The Zabbix web server can be customized by adding environment variables to `zabbix-web.env`.
+
+```
+runagent -m zabbix1 nano zabbix-web.env
+```
+
+### Zabbix agent
+
+The Zabbix agent can be customized by adding environment variables to `zabbix-agent.env`...
+
+```
+runagent -m zabbix1 nano zabbix-web.env
+```
+
+...or by creating a custom conf file.
+
+Enter zabbix environment:
+
+```
+runagent -m zabbix1
+```
+
+Create/edit custom conf file, in this example `override.conf`:
+
+```
+podman unshare nano $(podman volume inspect zabbix-agent-config --format={{.Mountpoint}})/override.conf
+```
+
 ## Add images to Zabbix
 
 The images should be in png format. If an image already exists it won't be added.
@@ -97,10 +141,6 @@ Exit the environment:
     exit
 
 The images should be available in the web UI now.
-
-## Login
-
-The default username is Admin and the password is zabbix. Please change the password as soon as possible.
 
 ## Uninstall
 
