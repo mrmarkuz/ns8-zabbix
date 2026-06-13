@@ -28,6 +28,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-app.pid \
     --env EXPOSE_WEB_SERVER_INFO=off \
     --env ZBX_SERVER_NAME=${ZBX_SERVER_NAME} \
     --env PHP_TZ=${PHP_TZ} \
+    --env-file=zabbix-web.env \
     ${ZABBIX_WEB_NGINX_PGSQL_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP zabbix-app

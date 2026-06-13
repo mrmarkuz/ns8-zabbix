@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2026 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e
+
+touch zabbix-server.env zabbix-web.env zabbix-agent.env

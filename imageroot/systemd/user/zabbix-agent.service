@@ -22,6 +22,8 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/zabbix-agent.pid \
     --cidfile %t/zabbix-agent.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/zabbix.pod-id --replace -d --name zabbix-agent \
     --env ZBX_SERVER_HOST=zabbix-server \
+    --env-file=zabbix-agent.env \
+    --volume zabbix-agent-config:/etc/zabbix/zabbix_agentd.d:z \
     ${ZABBIX_AGENT2_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/zabbix-agent.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP zabbix-agent

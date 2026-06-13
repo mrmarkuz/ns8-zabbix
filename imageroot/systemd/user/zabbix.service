@@ -19,6 +19,7 @@ EnvironmentFile=-%S/state/environment
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/zabbix.pid %t/zabbix.pod-id
+ExecStartPre=-runagent configure-zabbix
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/zabbix.pid \
     --pod-id-file %t/zabbix.pod-id \
     --name zabbix \
