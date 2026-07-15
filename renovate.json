@@ -1,36 +1,13 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "ignorePaths": [
-    "**/ui/**",
-    "**/.devcontainer/**"
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/build-images.sh/"
-      ],
-      "matchStrings": [
-        "\\bdocker\\.io/(?<depName>[^:]+):(?<currentValue>[-0-9\\.a-z]+)"
-      ],
-      "datasourceTemplate": "docker"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": [
-        "postgres"
-      ],
-      "allowedVersions": "< 16"
-    },
-    {
-      "matchPackageNames": [
-        "zabbix"
-      ],
-      "allowedVersions": "< 7.1.0"
-    }
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "local>NethServer/.github:ns8-automerge"
+    ],
+    "packageRules": [
+        {
+            "matchDatasources": ["docker"],
+            "matchPackageNames": ["zabbix"],
+            "allowedVersions": "7.0.*"
+        }
+    ]
 }
