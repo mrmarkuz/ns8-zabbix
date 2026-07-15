@@ -15,7 +15,7 @@ Before=postgresql-app.service zabbix-server.service zabbix-agent.service zabbix-
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=-%S/state/environment
+EnvironmentFile=-%E/state/environment
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/zabbix.pid %t/zabbix.pod-id
