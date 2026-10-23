@@ -15,26 +15,11 @@ repobase="${REPOBASE:-ghcr.io/mrmarkuz}"
 # Configure the image name
 reponame="zabbix"
 
-# Zabbix web frontend: the official Alpine image with its php85 packages
-# upgraded. The published 7.0.32-alpine image still runs PHP 8.5.11, affected
-# by CVE-2026-109618/109619 ("PHP2Shell"); Alpine ships the fix (8.5.12) as a
-# package. Remove this image (and use web_upstream in the label again) once
-# Zabbix publishes an image with PHP >= php_version.
-web_upstream="docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.32-alpine"
-php_version="8.5.12"
-web_container=$(buildah from "${web_upstream}")
-buildah run --user root "${web_container}" -- sh -c 'apk upgrade --no-cache $(apk info | grep "^php85")'
-built_php=$(buildah run "${web_container}" -- php-fpm85 -v | sed -n '1s/^PHP \([0-9.]*\) .*/\1/p')
-if [[ "${built_php}" != "${php_version}" ]]; then
-    echo "Zabbix web image runs PHP ${built_php}, expected ${php_version}" >&2
-    exit 1
-fi
-buildah config \
-    --label="org.opencontainers.image.source=https://github.com/mrmarkuz/ns8-zabbix" \
-    --label="org.opencontainers.image.description=${web_upstream##*/} with PHP ${php_version}" \
-    "${web_container}"
-buildah commit "${web_container}" "${repobase}/zabbix-web-nginx-pgsql"
-images+=("${repobase}/zabbix-web-nginx-pgsql")
+# Zabbix web frontend: 7.0.32-alpine was rebuilt upstream on 2026-10-22 with
+# PHP 8.5.12 (fix for CVE-2026-109618/109619, "PHP2Shell"). The tag was
+# replaced in place, so it is pinned by digest: installations that pulled the
+# old 7.0.32-alpine image get the rebuilt one on update.
+web_image="docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.32-alpine@sha256:a54ce2e19aaf0a61609e4bbc7ec01c16bef504e6e1c51e3854120ac76d2dbaeb"
 
 # Create a new empty container image
 container=$(buildah from scratch)
@@ -67,7 +52,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@any:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:15.19-alpine docker.io/zabbix/zabbix-server-pgsql:7.0.32-alpine docker.io/zabbix/zabbix-agent2:7.0.32-alpine ${repobase,,}/zabbix-web-nginx-pgsql:${IMAGETAG:-latest}" \
+    --label="org.nethserver.images=docker.io/postgres:15.19-alpine docker.io/zabbix/zabbix-server-pgsql:7.0.32-alpine docker.io/zabbix/zabbix-agent2:7.0.32-alpine ${web_image}" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
