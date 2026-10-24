@@ -1,7 +1,11 @@
 {
   "name": "Zabbix",
   "description": {
-    "en": "Open source monitoring suite"    
+    "en": "A free, open-source, enterprise-grade observability platform built to scale",
+    "de": "Eine kostenlose Open-Source-Observability-Plattform für Unternehmen, die auf Skalierbarkeit ausgelegt ist",
+    "fr": "Une plateforme d’observabilité gratuite, open source et de qualité professionnelle, conçue pour monter en charge",
+    "it": "Una piattaforma di osservabilità gratuita, open source e di livello enterprise, progettata per scalare",
+    "es": "Una plataforma de observabilidad gratuita, de código abierto y de nivel empresarial, diseñada para escalar"
   },
   "categories": ["monitoring"],
   "authors": [
@@ -11,7 +15,7 @@
     }
   ],
   "docs": {
-    "documentation_url": "https://www.zabbix.com/manuals",
+    "documentation_url": "https://www.zabbix.com/documentation",
     "bug_url": "https://community.nethserver.org",
     "code_url": "https://github.com/mrmarkuz/ns8-zabbix"
   },
