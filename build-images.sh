@@ -19,7 +19,7 @@ reponame="zabbix"
 # PHP 8.5.12 (fix for CVE-2026-109618/109619, "PHP2Shell"). The tag was
 # replaced in place, so it is pinned by digest: installations that pulled the
 # old 7.0.32-alpine image get the rebuilt one on update.
-web_image="docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.32-alpine@sha256:a54ce2e19aaf0a61609e4bbc7ec01c16bef504e6e1c51e3854120ac76d2dbaeb"
+web_image="docker.io/zabbix/zabbix-web-nginx-pgsql:7.4.16-alpine@sha256:62ffffb395b9ecd63e9260263dcd9bb4038668fd691e0be1e396bc0182bf77ba"
 
 # Create a new empty container image
 container=$(buildah from scratch)
