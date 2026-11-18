@@ -14,7 +14,9 @@ images=()
 repobase="${REPOBASE:-ghcr.io/mrmarkuz}"
 # Configure the image name
 reponame="zabbix"
-
+# Node.js 25+ no longer ships Corepack, install it from npm
+# renovate: datasource=npm packageName=corepack
+corepack_version=0.36.0
 # Zabbix web frontend: 7.0.32-alpine was rebuilt upstream on 2026-10-22 with
 # PHP 8.5.12 (fix for CVE-2026-109618/109619, "PHP2Shell"). The tag was
 # replaced in place, so it is pinned by digest: installations that pulled the
@@ -27,7 +29,8 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-zabbix container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-zabbix; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-zabbix -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-zabbix -v "${PWD}:/usr/src:Z" docker.io/library/node:26.13.0-slim
+    buildah run nodebuilder-zabbix sh -c "npm install -g corepack@${corepack_version} && corepack enable"
 fi
 
 echo "Build static UI files with node..."
@@ -35,7 +38,7 @@ buildah run \
     --workingdir=/usr/src/ui \
     --env="NODE_OPTIONS=--openssl-legacy-provider" \
     nodebuilder-zabbix \
-    sh -c "(command -v corepack >/dev/null || npm install -g corepack) && corepack enable && yarn install && yarn build"
+    sh -c "yarn install && yarn build"
 
 # Add imageroot directory to the container image
 buildah add "${container}" imageroot /imageroot
