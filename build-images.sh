@@ -17,11 +17,6 @@ reponame="zabbix"
 # Node.js 25+ no longer ships Corepack, install it from npm
 # renovate: datasource=npm packageName=corepack
 corepack_version=0.36.0
-# Zabbix web frontend: 7.0.32-alpine was rebuilt upstream on 2026-10-22 with
-# PHP 8.5.12 (fix for CVE-2026-109618/109619, "PHP2Shell"). The tag was
-# replaced in place, so it is pinned by digest: installations that pulled the
-# old 7.0.32-alpine image get the rebuilt one on update.
-web_image="docker.io/zabbix/zabbix-web-nginx-pgsql:7.0.32-alpine@sha256:a54ce2e19aaf0a61609e4bbc7ec01c16bef504e6e1c51e3854120ac76d2dbaeb"
 
 # Create a new empty container image
 container=$(buildah from scratch)
@@ -55,7 +50,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@any:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:15.19-alpine docker.io/zabbix/zabbix-server-pgsql:7.0.32-alpine docker.io/zabbix/zabbix-agent2:7.0.32-alpine ${web_image}" \
+    --label="org.nethserver.images=docker.io/postgres:15.20-alpine docker.io/zabbix/zabbix-server-pgsql:8.0.0-alpine docker.io/zabbix/zabbix-agent2:8.0.0-alpine docker.io/zabbix/zabbix-web-nginx-pgsql:8.0.0-alpine" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
