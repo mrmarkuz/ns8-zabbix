@@ -50,7 +50,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@any:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/postgres:15.20-alpine docker.io/zabbix/zabbix-server-pgsql:8.0.0-alpine docker.io/zabbix/zabbix-agent2:8.0.0-alpine docker.io/zabbix/zabbix-web-nginx-pgsql:8.0.0-alpine docker.io/zabbix/zabbix-mcp-server:8.0.0-alpine" \
+    --label="org.nethserver.images=docker.io/postgres:19.0-alpine docker.io/zabbix/zabbix-server-pgsql:8.0.0-alpine docker.io/zabbix/zabbix-agent2:8.0.0-alpine docker.io/zabbix/zabbix-web-nginx-pgsql:8.0.0-alpine docker.io/zabbix/zabbix-mcp-server:8.0.0-alpine" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
